@@ -9,6 +9,21 @@ import time
 #save in csv
 import csv
 
+def change_ip():
+	socks.set_default_proxy(socks.SOCKS5, "localhost", 9150)
+	socket.socket = socks.socksocket
+	ip = requests.get('http://checkip.dyndns.org').content
+	soup = BeautifulSoup(ip, 'html.parser')
+	print(soup.find('body').text)
+
+def get_html(url):
+	html = requests.get(url, headers={'User-Agent': UserAgent().chrome})
+	print(html)
+	return html
+
+def get_bs(html):
+	soup = BeautifulSoup(html.text, 'lxml')
+	return soup
 
 def total_pages(url):
 	html = get_html(url)
@@ -31,6 +46,7 @@ def word_search():
 		word_search()
 
 def main():
+    change_ip()
 	main_words = word_search()
 	url_s = ('https://www.etsy.com/search?q=' + main_words + '&ref=pagination&page=1')
 	print(total_pages(url_s)+1))
