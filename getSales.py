@@ -15,7 +15,7 @@ DIR_NAME = datetime.datetime.now().strftime("%B")
 FILE_NAME = f"{datetime.datetime.now().day}.csv"
 PASSWORD = "password"
 EMAIL = "email"
-
+   
 def sleep_random():
     sl_time = random.uniform(1, 2.9)
     logging.info(f'Please wait: {sl_time} s')
